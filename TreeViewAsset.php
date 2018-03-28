@@ -28,14 +28,20 @@ class TreeViewAsset extends AssetBundle
         'yii\validators\ValidationAsset',
     ];
 
+    public $js = [
+        'js/kv-tree.js',
+    ];
+
+    public $css = [
+        'css/kv-tree.css',
+    ];
+
     /**
      * @inheritdoc
      */
     public function init()
     {
         $this->setSourcePath(__DIR__ . '/assets');
-        $this->setupAssets('js', ['js/kv-tree']);
-        $this->setupAssets('css', ['css/kv-tree']);
         parent::init();
     }
 }
