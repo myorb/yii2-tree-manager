@@ -110,11 +110,11 @@ class Module extends \kartik\base\Module
      */
     public function init()
     {
+        $this->_msgCat = 'kvtree';
+        parent::init();
         if(is_a(Yii::$app,'yii\console\Application')){
             return false;
         }
-        $this->_msgCat = 'kvtree';
-        parent::init();
         $this->treeStructure += [
             'treeAttribute' => 'root',
             'leftAttribute' => 'lft',
