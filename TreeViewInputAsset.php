@@ -25,6 +25,10 @@ class TreeViewInputAsset extends AssetBundle
         'kartik\tree\TreeViewAsset'
     ];
 
+    public $js = [
+        'js/kv-tree-input.js',
+    ];
+
     /**
      * @inheritdoc
      */
@@ -32,7 +36,6 @@ class TreeViewInputAsset extends AssetBundle
     {
         $this->setSourcePath(__DIR__ . '/assets');
         $this->setupAssets('css', ['css/kv-tree-input']);
-        $this->setupAssets('js', ['js/kv-tree-input']);
         parent::init();
     }
 }
