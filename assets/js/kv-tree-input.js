@@ -57,7 +57,7 @@
             if (isEmpty(list) || isEmpty(list[0])) {
                 out = self.placeholder;
             } else {
-                if (list.length > self.numberDisplayed) {
+                if (self.numberDisplayed && list.length > self.numberDisplayed) {
                     out = list.length + ' selected';
                 } else {
                     if (list.length === 1) {
