@@ -558,7 +558,7 @@
             var self = this, keys = '', desc = '';
             self.$tree.find('.kv-selected').each(function () {
                 var $node = $(this), sep = $h.isEmpty(keys) ? '' : ',';
-                if (!self.showCheckboxHasChildren && $node.data('has-children') > 0) {
+                if (!self.selectRoot && $node.data('has-children') > 0) {
                     return;
                 }
                 keys += sep + $node.data('key');
@@ -1005,7 +1005,8 @@
         cascadeSelectChildren: true,
         rootKey: '',
         hideUnmatchedSearchItems: true,
-        showCheckboxHasChildren: true
+        showCheckboxHasChildren: true,
+        selectRoot: true
     };
     $.fn.treeview.Constructor = TreeView;
 })(window.jQuery);

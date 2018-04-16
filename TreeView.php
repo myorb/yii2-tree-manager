@@ -500,7 +500,15 @@ class TreeView extends Widget
      */
     public $krajeeDialogSettings = [];
 
+    /**
+     * @var bool multiple - selectRoot if multiple
+     */
     public $showCheckboxHasChildren = true;
+
+    /**
+     * @var bool whether user can select root node
+     */
+    public $selectRoot = true;
 
     /**
      * @var string the main template for rendering the tree view navigation widget and the node detail view form. The
@@ -821,6 +829,9 @@ HTML;
             $this->defaultParentNodeOpenIcon = $this->getNodeIcon(3);
         }
         $this->_iconsList = $this->getIconsList();
+        if (!$this->selectRoot && $this->multiple) {
+            $this->showCheckboxHasChildren = false;
+        }
     }
 
     /**
@@ -1056,7 +1067,7 @@ HTML;
             if ($node->isCollapsed()) {
                 $css[] = 'kv-collapsed ';
             }
-            if ($node->isDisabled()) {
+            if ($node->isDisabled() || ($hasChildren && !$this->multiple && !$this->selectRoot)) {
                 $css[] = 'kv-disabled ';
             }
             if (!$node->isActive()) {
@@ -1175,6 +1186,7 @@ HTML;
             'allowNewRoots' => $this->allowNewRoots,
             'hideUnmatchedSearchItems' => $this->hideUnmatchedSearchItems,
             'showCheckboxHasChildren' => $this->showCheckboxHasChildren,
+            'selectRoot' => $this->selectRoot,
         ];
         $this->pluginOptions['rootKey'] = self::ROOT_KEY;
         $this->registerPlugin('treeview');
