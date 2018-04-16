@@ -558,6 +558,9 @@
             var self = this, keys = '', desc = '';
             self.$tree.find('.kv-selected').each(function () {
                 var $node = $(this), sep = $h.isEmpty(keys) ? '' : ',';
+                if (!self.showCheckboxHasChildren && $node.data('has-children') > 0) {
+                    return;
+                }
                 keys += sep + $node.data('key');
                 desc += sep + $node.find('>.kv-tree-list .kv-node-label').text();
             });
@@ -1001,7 +1004,8 @@
         breadcrumbs: {},
         cascadeSelectChildren: true,
         rootKey: '',
-        hideUnmatchedSearchItems: true
+        hideUnmatchedSearchItems: true,
+        showCheckboxHasChildren: true
     };
     $.fn.treeview.Constructor = TreeView;
 })(window.jQuery);

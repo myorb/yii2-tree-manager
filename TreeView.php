@@ -500,6 +500,8 @@ class TreeView extends Widget
      */
     public $krajeeDialogSettings = [];
 
+    public $showCheckboxHasChildren = true;
+
     /**
      * @var string the main template for rendering the tree view navigation widget and the node detail view form. The
      * following tokens will be automatically parsed and replaced:
@@ -915,7 +917,7 @@ HTML;
     public function renderRoot()
     {
         $content = $this->renderToggleIconContainer(true);
-        if ($this->showCheckbox) {
+        if ($this->showCheckboxHasChildren) {
             $content .= $this->renderCheckboxIconContainer(true);
         }
         $content .= ArrayHelper::remove($this->rootOptions, 'label', Yii::t('kvtree', 'Root'));
@@ -1002,6 +1004,7 @@ HTML;
             $nodeIcon = $node->$iconAttribute;
             /** @noinspection PhpUndefinedVariableInspection */
             $nodeIconType = $node->$iconTypeAttribute;
+            $hasChildren = $node->children()->count();
 
             $isChild = ($nodeRight == $nodeLeft + 1);
             $indicators = '';
@@ -1037,6 +1040,7 @@ HTML;
                 'data-movable-r' => static::parseBool($node->isMovable('r')),
                 'data-removable' => static::parseBool($node->isRemovable()),
                 'data-removable-all' => static::parseBool($node->isRemovableAll()),
+                'data-has-children' => $hasChildren,
             ];
 
             $css = [];
@@ -1059,7 +1063,7 @@ HTML;
                 $css[] = 'kv-inactive ';
             }
             $indicators .= $this->renderToggleIconContainer(false) . "\n";
-            $indicators .= $this->showCheckbox ? $this->renderCheckboxIconContainer(false) . "\n" : '';
+            $indicators .= $this->showCheckbox ? $this->renderCheckboxIconContainer(false, $hasChildren) . "\n" : '';
             if (!empty($css)) {
                 Html::addCssClass($nodeOptions, $css);
             }
@@ -1170,6 +1174,7 @@ HTML;
             'cascadeSelectChildren' => $this->cascadeSelectChildren,
             'allowNewRoots' => $this->allowNewRoots,
             'hideUnmatchedSearchItems' => $this->hideUnmatchedSearchItems,
+            'showCheckboxHasChildren' => $this->showCheckboxHasChildren,
         ];
         $this->pluginOptions['rootKey'] = self::ROOT_KEY;
         $this->registerPlugin('treeview');
@@ -1394,8 +1399,11 @@ HTML;
      *
      * @return string
      */
-    protected function renderCheckboxIconContainer($root = false)
+    protected function renderCheckboxIconContainer($root = false, $hasChildren = false)
     {
+        if ($hasChildren && !$this->showCheckboxHasChildren) {
+            return '';
+        }
         $content = $this->renderCheckboxIcon(true) . $this->renderCheckboxIcon(false);
         $options = $root ? $this->rootNodeCheckboxOptions : $this->nodeCheckboxOptions;
         return Html::tag('span', $content, $options);
