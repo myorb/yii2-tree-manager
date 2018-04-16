@@ -57,12 +57,16 @@
             if (isEmpty(list) || isEmpty(list[0])) {
                 out = self.placeholder;
             } else {
-                if (list.length === 1) {
-                    out = list[0];
+                if (list.length > self.numberDisplayed) {
+                    out = list.length + ' selected';
                 } else {
-                    out = '<ul class="kv-tree-input-values"><li>' + list.join('</li><li>') +
-                        '</li></ul><div class="clearfix"></div>';
-                    self.$input.addClass('has-multi');
+                    if (list.length === 1) {
+                        out = list[0];
+                    } else {
+                        out = '<ul class="kv-tree-input-values"><li>' + list.join('</li><li>') +
+                            '</li></ul><div class="clearfix"></div>';
+                        self.$input.addClass('has-multi');
+                    }
                 }
             }
             self.$input.html(self.caret + out);
@@ -106,7 +110,8 @@
         placeholder: '',
         value: '',
         caret: '',
-        autoCloseOnSelect: true
+        autoCloseOnSelect: true,
+        numberDisplayed: null
     };
 
     $.fn.treeinput.Constructor = TreeInput;

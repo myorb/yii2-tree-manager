@@ -83,6 +83,11 @@ class TreeViewInput extends TreeView
     public $options = ['class' => 'form-control hide'];
 
     /**
+     * @var int number of selected categories displayed
+     */
+    public $numberDisplayed;
+
+    /**
      * @var string the placeholder for the dropdown input
      */
     private $_placeholder;
@@ -253,7 +258,8 @@ class TreeViewInput extends TreeView
             'placeholder' => $this->_placeholder,
             'value' => empty($this->value) ? '' : $this->value,
             'caret' => $this->dropdownConfig['caret'],
-            'autoCloseOnSelect' => $this->autoCloseOnSelect
+            'autoCloseOnSelect' => $this->autoCloseOnSelect,
+            'numberDisplayed' => $this->numberDisplayed,
         ]);
         $var = $name . '_' . hash('crc32', $opts);
         $this->options['data-krajee-' . $name] = $var;
