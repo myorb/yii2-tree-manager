@@ -24,9 +24,9 @@
     }
   ],
   "require": {
-    "kartik-v/yii2-widget-activeform": "~1.4",
+    "bilyuk/yii2-widget-activeform": "dev-master",
     "creocoder/yii2-nested-sets": "~0.9",
-    "kartik-v/yii2-dialog": "~1.0"
+    "bilyuk/yii2-dialog": "dev-master"
   },
   "autoload": {
     "psr-4": {
@@ -37,5 +37,15 @@
     "branch-alias": {
       "dev-master": "1.0.x-dev"
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/bilyuk/yii2-widget-activeform"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/bilyuk/yii2-dialog"
+    }
+  ]
 }
