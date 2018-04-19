@@ -15,7 +15,7 @@ use kartik\dialog\Dialog;
 use kartik\tree\models\Tree;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii\bootstrap\BootstrapPluginAsset;
+use yii\bootstrap4\BootstrapPluginAsset;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
