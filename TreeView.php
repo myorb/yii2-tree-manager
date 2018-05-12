@@ -243,6 +243,11 @@ class TreeView extends Widget
     public $fontAwesome = false;
 
     /**
+     * @var bool whether to use bootstrap 3 assets
+     */
+    public $bootstrap3 = false;
+
+    /**
      * @var array settings to edit the icon. The following settings are recognized:
      * - `show`: _string_, whether to display the icons selection as a list. If set to 'text', the icon will be shown as a
      *   plain text input along with icon type. If set to `'list'`, a list will be shown. If set to `'none'`, then no
@@ -1149,9 +1154,16 @@ HTML;
     public function registerAssets()
     {
         $view = $this->getView();
-        TreeViewAsset::register($view);
-        if ($this->_hasBootstrap && $this->autoLoadBsPlugin) {
-            BootstrapPluginAsset::register($view);
+        if ($this->bootstrap3) {
+            TreeViewBootstrap3Asset::register($view);
+            if ($this->_hasBootstrap && $this->autoLoadBsPlugin) {
+                \backend\assets\BootstrapPluginAsset::register($view);
+            }
+        } else {
+            TreeViewAsset::register($view);
+            if ($this->_hasBootstrap && $this->autoLoadBsPlugin) {
+                BootstrapPluginAsset::register($view);
+            }
         }
         Dialog::widget($this->krajeeDialogSettings);
         $this->pluginOptions += [

@@ -248,7 +248,11 @@ class TreeViewInput extends TreeView
             return;
         }
         $view = $this->getView();
-        TreeViewInputAsset::register($view);
+        if ($this->bootstrap3) {
+            TreeViewInputAssetBootstrap3::register($view);
+        } else {
+            TreeViewInputAsset::register($view);
+        }
         $id = $this->options['id'];
         $name = 'treeinput';
         $opts = Json::encode([
