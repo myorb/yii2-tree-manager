@@ -1106,7 +1106,7 @@ HTML;
         };
 
         if (isset($this->cacheSettings['key'])) {
-            $timeout = ArrayHelper::getValue($this->cacheSettings, 'timeout', 3600);
+            $timeout = ArrayHelper::getValue($this->cacheSettings, 'timeout', 0);
 
             return Yii::$app->getCache()->getOrSet($this->cacheSettings['key'], $closure, $timeout);
         } else {
